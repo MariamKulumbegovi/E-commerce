@@ -1,3 +1,9 @@
+import { Clothes } from '../../components/clothes';
+
 export const ClothesPage = () => {
-  return <div>Clothes Page</div>;
+  return (
+    <div>
+      <Clothes />
+    </div>
+  );
 };

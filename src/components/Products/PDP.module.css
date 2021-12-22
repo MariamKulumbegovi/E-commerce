@@ -1,0 +1,91 @@
+.imgsWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.imgs {
+  max-width: 79px;
+  width: 100%;
+  height: 80px;
+  margin-top: 5px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin-top: 30px;
+}
+.photo {
+  max-width: 610px;
+  width: 100%;
+  height: 511px;
+  margin-top: 5px;
+}
+.brand,
+.name {
+  font-size: 30px;
+  font-family: 'Raleway';
+  font-weight: 600;
+}
+
+.name {
+  font-weight: 400;
+}
+.addtocart {
+  width: 292px;
+  height: 52px;
+  background-color: #5ece7b;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Raleway';
+}
+.priceh {
+  font-size: 18px;
+  font-weight: 700;
+}
+.price {
+  font-size: 24px;
+  font-weight: 700;
+}
+.sizebtn {
+  width: 63px;
+  height: 45px;
+  border: 1px solid #a6a6a6;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #292929;
+  font-size: 18px;
+  font-weight: 400;
+  cursor: pointer;
+}
+.sizebtn:focus {
+  background-color: black;
+  color: #fff;
+}
+.sizesWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.detailedInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: -50px;
+}
+.description {
+  font-size: 16px;
+  font-weight: normal;
+  word-break: break-all;
+}
+.colors {
+  width: 63px;
+  height: 45px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+.outofstock {
+    opacity: 0.5;
+    color: rgb(226, 40, 40);
+}

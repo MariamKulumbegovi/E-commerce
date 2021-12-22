@@ -3,7 +3,16 @@ import * as route from '../../constants/routes';
 import styles from './Header.module.css';
 import logo from '../../img/a-logo.svg';
 import cart from '../../img/EmptyCart.svg';
+import { useQuery } from '@apollo/client';
+import { CURRENCIES } from '../../query';
+
 export const Header = () => {
+  const { loading, error, data } = useQuery(CURRENCIES);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+  // console.log(data.currencies);
+
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -40,14 +49,17 @@ export const Header = () => {
         </div>
         <div className={styles.actions}>
           <select>
-            <option>$ USD</option>
-            <option>€ EUR</option>
-            <option>¥ JPY</option>
+            {data.currencies.map(curr => {
+              return (
+                <option key={curr.label}>
+                  {curr.label} {curr.symbol}{' '}
+                </option>
+              );
+            })}
           </select>
           <img className={styles.cart} width="auto" height="auto" src={cart} />
         </div>
       </nav>
     </header>
-  
   );
 };

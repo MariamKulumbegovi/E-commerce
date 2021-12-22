@@ -2,17 +2,16 @@ import { useEffect } from 'react';
 import {Products} from '../Products/Products';
 import { witProducts } from '../../hoc/withProducts';
 
-const Home = ({ data }) => {
+const Clothes = ({ data }) => {
   useEffect(() => {}, [data]);
-
   return (
     <div>
       <div>
-        <h1>All Categories</h1>
+        <h1>Clothes</h1>
       </div>
       <div>
         {data.categories.map(category => {
-          if (category.name == 'all') {
+          if (category.name == 'clothes') {
             return <Products data={category} />;
           }
         })}
@@ -21,4 +20,4 @@ const Home = ({ data }) => {
   );
 };
 
-export default witProducts(Home);
+export default witProducts(Clothes);

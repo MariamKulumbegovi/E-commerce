@@ -1,3 +1,9 @@
+import { Tech } from '../../components/tech';
+
 export const TechPage = () => {
-  return <div>Tech page</div>;
+  return (
+    <div>
+      <Tech />
+    </div>
+  );
 };

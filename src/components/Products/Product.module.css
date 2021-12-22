@@ -1,0 +1,46 @@
+.outofstock {
+  opacity: 0.5;
+  width: inherit;
+}
+.outofstock::after {
+  position: absolute;
+  content: 'OUT OF STOCK';
+  font-family: 'Raleway';
+  font-size: 24px;
+  color: #8d8f9a;
+  top: 40%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+.inStock {
+  opacity: 1;
+  width: inherit;
+}
+.wrapper {
+  max-width: 386px;
+  width: 100%;
+  height: 444px;
+  position: relative;
+  box-shadow: 0px 4px 35px 0px #a8acb030;
+  padding: 16px;
+  margin-top: 70px;
+}
+.product {
+  max-width: 356px;
+  width: 100%;
+  height: 338px;
+  position: relative;
+}
+.font {
+  color: #1d1f22;
+  font-family: 'Raleway';
+  font-size: 18px;
+}
+.cartIcon {
+  position: absolute;
+  right: 11%;
+  height: 52px;
+  width: 52px;
+  bottom: 21%;
+}
