@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { Category } from '../query';
 
-export const witProducts = Component => {
+export const withProducts = Component => {
   const WithProducts = props => {
     const { loading, error, data } = useQuery(Category);
     if (loading) return <p>Loading...</p>;

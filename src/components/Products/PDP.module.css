@@ -59,15 +59,20 @@
   font-size: 18px;
   font-weight: 400;
   cursor: pointer;
+  margin-right: 10px;
 }
 .sizebtn:focus {
   background-color: black;
   color: #fff;
 }
-.sizesWrapper {
+/* .sizesWrapper {
   display: flex;
-  justify-content: space-between;
-}
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  max-width: 292px;
+  align-items: baseline;
+  
+} */
 .detailedInfo {
   display: flex;
   flex-direction: column;
@@ -78,14 +83,19 @@
   font-size: 16px;
   font-weight: normal;
   word-break: break-all;
+  max-width: 292px;
 }
 .colors {
   width: 63px;
   height: 45px;
   border-radius: 100%;
   cursor: pointer;
+  margin-right: 10px;
 }
 .outofstock {
-    opacity: 0.5;
-    color: rgb(226, 40, 40);
+  opacity: 0.5;
+  color: rgb(226, 40, 40);
+}
+.cwrapper {
+  display: flex;
 }

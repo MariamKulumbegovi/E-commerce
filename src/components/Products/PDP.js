@@ -1,8 +1,19 @@
-import { gql, useQuery } from '@apollo/client';
+import {  gql, useQuery } from '@apollo/client';
+import { useState } from 'react';
+import { useLocation } from 'react-router';
 import styles from './PDP.module.css';
-export const Product = gql`
+
+
+
+
+export const PDP = () => {
+  
+  const location = useLocation();
+  const id=  location.pathname.split('/')[1];
+  
+  const PRODUCT = gql`
   query GetProduct {
-    product(id: "huarache-x-stussy-le") {
+    product(id: "${id}") {
       gallery
       name
       brand
@@ -15,6 +26,7 @@ export const Product = gql`
           displayValue
           value
           id
+         
         }
       }
       prices {
@@ -26,15 +38,21 @@ export const Product = gql`
       }
     }
   }
-`;
+  `;
+  
+  const [color,setColor]=useState("")
+  const [size,setSize]=useState("")
 
-// huarache-x-stussy-le  ps-5
-export const PDP = () => {
-  const { loading, error, data } = useQuery(Product);
+  const handleClick=()=>{
+    console.log("submit")
+  }
+
+console.log(color,size)
+  const { loading, error, data } = useQuery(PRODUCT);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-  console.log(data.product.attributes[0], ' PDP');
-  console.log(data.product);
+
+
 
   const item = data.product;
 
@@ -53,24 +71,53 @@ export const PDP = () => {
         <div>
           <h1 className={styles.brand}>{item.brand}</h1>
           <h2 className={styles.name}>{item.name}</h2>
-          <h3 className={styles.outofstock}> {item.inStock ? "" : "This item is out of stock"} </h3>
+          <h3 className={styles.outofstock}>
+            
+            {item.inStock ? '' : 'This item is out of stock'}
+          </h3>
         </div>
         <div>
-          <h3>{item.attributes[0].id}:</h3>
           <div className={styles.sizesWrapper}>
-            {item.attributes[0].items.map(att => {
-              if (item.attributes[0].id == 'Size') {
+            {item.attributes.map(att => {
+              if (att.id == 'Color') {
                 return (
-                  <button className={styles.sizebtn} key={att.id}>
-                    {att.value}
-                  </button>
+                  <div key={att.id} className={styles.attwrapper}>
+                    <h3>{att.id} :</h3>
+                    <div className={styles.cwrapper}>
+                      {att.items.map(one => {
+                        return (
+                          
+                            <div
+                              color={one.displayValue}
+                              key={one.displayValue}
+                              className={styles.colors}
+                              onClick={()=>setColor(one.displayValue)}
+                              style={{ backgroundColor: `${one.value}` }}
+                            ></div>
+                        
+                        );
+                      })}
+                    </div>
+                  </div>
                 );
               } else {
                 return (
-                  <div
-                    className={styles.colors}
-                    style={{ backgroundColor: `${att.value}` }}
-                  ></div>
+                  <div>
+                    <h3>{att.id}:</h3>
+                    <div>
+                      {att.items.map(one => {
+                        return (
+                          <button 
+                          onClick={()=>setSize(one.value)} 
+                          value={one.value} 
+                           className={styles.sizebtn} 
+                           key={one.value}>
+                            {one.value}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
                 );
               }
             })}
@@ -81,7 +128,7 @@ export const PDP = () => {
           <strong className={styles.price}> $50 </strong>
         </div>
         <div>
-          <button className={styles.addtocart}>ADD TO CART</button>
+          <button onClick={handleClick} className={styles.addtocart}>ADD TO CART</button>
         </div>
         <div>
           <p className={styles.description}> {item.description}</p>
