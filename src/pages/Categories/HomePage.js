@@ -11,7 +11,7 @@ const HomePage = ({ data }) => {
       <div>
         {data.categories.map(category => {
           if (category.name == 'all') {
-            return <Products key={"all"} data={category} />;
+            return <Products key={'all'} data={category} />;
           }
         })}
       </div>

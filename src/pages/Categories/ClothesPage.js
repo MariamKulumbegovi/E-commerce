@@ -11,7 +11,7 @@ const ClothesPage = ({ data }) => {
       <div>
         {data.categories.map(category => {
           if (category.name == 'clothes') {
-            return <Products key={"clothes"} data={category} />;
+            return <Products key={'clothes'} data={category} />;
           }
         })}
       </div>

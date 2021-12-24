@@ -1,16 +1,12 @@
-import {  gql, useQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import { useState } from 'react';
 import { useLocation } from 'react-router';
 import styles from './PDP.module.css';
 
-
-
-
 export const PDP = () => {
-  
   const location = useLocation();
-  const id=  location.pathname.split('/')[1];
-  
+  const id = location.pathname.split('/')[1];
+
   const PRODUCT = gql`
   query GetProduct {
     product(id: "${id}") {
@@ -39,20 +35,18 @@ export const PDP = () => {
     }
   }
   `;
-  
-  const [color,setColor]=useState("")
-  const [size,setSize]=useState("")
 
-  const handleClick=()=>{
-    console.log("submit")
-  }
+  const [color, setColor] = useState('');
+  const [size, setSize] = useState('');
 
-console.log(color,size)
+  const handleClick = () => {
+    console.log('submit');
+  };
+
+  console.log(color, size);
   const { loading, error, data } = useQuery(PRODUCT);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-
-
 
   const item = data.product;
 
@@ -72,7 +66,6 @@ console.log(color,size)
           <h1 className={styles.brand}>{item.brand}</h1>
           <h2 className={styles.name}>{item.name}</h2>
           <h3 className={styles.outofstock}>
-            
             {item.inStock ? '' : 'This item is out of stock'}
           </h3>
         </div>
@@ -86,15 +79,13 @@ console.log(color,size)
                     <div className={styles.cwrapper}>
                       {att.items.map(one => {
                         return (
-                          
-                            <div
-                              color={one.displayValue}
-                              key={one.displayValue}
-                              className={styles.colors}
-                              onClick={()=>setColor(one.displayValue)}
-                              style={{ backgroundColor: `${one.value}` }}
-                            ></div>
-                        
+                          <div
+                            color={one.displayValue}
+                            key={one.displayValue}
+                            className={styles.colors}
+                            onClick={() => setColor(one.displayValue)}
+                            style={{ backgroundColor: `${one.value}` }}
+                          ></div>
                         );
                       })}
                     </div>
@@ -107,11 +98,12 @@ console.log(color,size)
                     <div>
                       {att.items.map(one => {
                         return (
-                          <button 
-                          onClick={()=>setSize(one.value)} 
-                          value={one.value} 
-                           className={styles.sizebtn} 
-                           key={one.value}>
+                          <button
+                            onClick={() => setSize(one.value)}
+                            value={one.value}
+                            className={styles.sizebtn}
+                            key={one.value}
+                          >
                             {one.value}
                           </button>
                         );
@@ -128,7 +120,9 @@ console.log(color,size)
           <strong className={styles.price}> $50 </strong>
         </div>
         <div>
-          <button onClick={handleClick} className={styles.addtocart}>ADD TO CART</button>
+          <button onClick={handleClick} className={styles.addtocart}>
+            ADD TO CART
+          </button>
         </div>
         <div>
           <p className={styles.description}> {item.description}</p>

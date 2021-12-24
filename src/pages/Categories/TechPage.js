@@ -11,7 +11,7 @@ const TechPage = ({ data }) => {
       <div>
         {data.categories.map(category => {
           if (category.name == 'tech') {
-            return <Products key={"tech"} data={category} />;
+            return <Products key={'tech'} data={category} />;
           }
         })}
       </div>

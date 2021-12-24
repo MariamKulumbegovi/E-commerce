@@ -5,13 +5,14 @@ import logo from '../../img/a-logo.svg';
 import cart from '../../img/EmptyCart.svg';
 import { useQuery } from '@apollo/client';
 import { CURRENCIES } from '../../query';
+import { MiniCart } from '../cart/MiniCart';
 
 export const Header = () => {
   const { loading, error, data } = useQuery(CURRENCIES);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-  // console.log(data.currencies);
+
 
   return (
     <header className={styles.header}>
@@ -26,7 +27,7 @@ export const Header = () => {
             All
           </NavLink>
           <NavLink
-            exact
+            
             className={styles.navlink}
             activeClassName={styles.navlinkActive}
             to={route.TECH_PATH}
@@ -34,7 +35,7 @@ export const Header = () => {
             Tech
           </NavLink>
           <NavLink
-            exact
+            
             className={styles.navlink}
             activeClassName={styles.navlinkActive}
             to={route.CLOTHES_PATH}
@@ -43,7 +44,7 @@ export const Header = () => {
           </NavLink>
         </div>
         <div>
-          <Link to={route.HOME_PATH}>
+          <Link to={route.CART_PATH}>
             <img width="auto" height="auto" src={logo} />
           </Link>
         </div>
@@ -57,7 +58,15 @@ export const Header = () => {
               );
             })}
           </select>
-          <img className={styles.cart} width="auto" height="auto" src={cart} />
+            <div>
+            <img
+              className={styles.cart}
+              width="auto"
+              height="auto"
+              src={cart}
+            />
+           <MiniCart/>
+            </div>
         </div>
       </nav>
     </header>
