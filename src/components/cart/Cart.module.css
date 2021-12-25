@@ -34,8 +34,8 @@
   align-items: center;
 }
 .totalWrap {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
 }

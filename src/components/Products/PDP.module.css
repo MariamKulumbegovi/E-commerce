@@ -40,6 +40,10 @@
   font-size: 16px;
   font-weight: 600;
   font-family: 'Raleway';
+  cursor: pointer;
+}
+.addtocart:hover {
+  background-color: #299e48;
 }
 .priceh {
   font-size: 18px;
@@ -61,18 +65,14 @@
   cursor: pointer;
   margin-right: 10px;
 }
+.sizebtn:hover {
+  background-color: #e2e2e2;
+}
 .sizebtn:focus {
   background-color: black;
   color: #fff;
 }
-/* .sizesWrapper {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  max-width: 292px;
-  align-items: baseline;
-  
-} */
+
 .detailedInfo {
   display: flex;
   flex-direction: column;
@@ -92,6 +92,10 @@
   cursor: pointer;
   margin-right: 10px;
 }
+.colors:hover {
+  transform: scale(1.2);
+}
+
 .outofstock {
   opacity: 0.5;
   color: rgb(226, 40, 40);

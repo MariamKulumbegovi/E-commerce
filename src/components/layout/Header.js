@@ -1,18 +1,22 @@
 import { Link, NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import * as route from '../../constants/routes';
 import styles from './Header.module.css';
 import logo from '../../img/a-logo.svg';
-import cart from '../../img/EmptyCart.svg';
+import cartl from '../../img/EmptyCart.svg';
 import { useQuery } from '@apollo/client';
 import { CURRENCIES } from '../../query';
 import { MiniCart } from '../cart/MiniCart';
 
 export const Header = () => {
+  const quantity = useSelector(state => state.cart.quantity);
+
+ 
+
   const { loading, error, data } = useQuery(CURRENCIES);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-
 
   return (
     <header className={styles.header}>
@@ -27,7 +31,6 @@ export const Header = () => {
             All
           </NavLink>
           <NavLink
-            
             className={styles.navlink}
             activeClassName={styles.navlinkActive}
             to={route.TECH_PATH}
@@ -35,7 +38,6 @@ export const Header = () => {
             Tech
           </NavLink>
           <NavLink
-            
             className={styles.navlink}
             activeClassName={styles.navlinkActive}
             to={route.CLOTHES_PATH}
@@ -58,15 +60,19 @@ export const Header = () => {
               );
             })}
           </select>
-            <div>
-            <img
-              className={styles.cart}
-              width="auto"
-              height="auto"
-              src={cart}
-            />
-           <MiniCart/>
-            </div>
+          <div className={styles.cartdiv}>
+            <Link to={route.CART_PATH}>
+              <label className={styles.cartLabel}>{quantity}</label>
+              <img
+                className={styles.cart}
+                width="auto"
+                height="auto"
+                src={cartl}
+              />
+            </Link>
+
+            <MiniCart />
+          </div>
         </div>
       </nav>
     </header>

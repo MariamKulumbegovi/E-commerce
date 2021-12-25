@@ -1,8 +1,11 @@
 import styles from './Product.module.css';
 import cartIcon from '../../img/CircleIcon.svg';
 import { Link } from 'react-router-dom';
-
+import { addProduct } from '../../redux/cartRedux';
+import { useDispatch } from 'react-redux';
 export const Product = ({ data }) => {
+  const dispatch = useDispatch()
+ 
   return (
     <>
       {data.products.map(product => {
@@ -13,7 +16,7 @@ export const Product = ({ data }) => {
                 className={product.inStock ? styles.inStock : styles.outofstock}
               >
                 <img className={styles.product} src={product.gallery[0]} />
-                <img className={styles.cartIcon} src={cartIcon} />
+                <img  className={styles.cartIcon} src={cartIcon} />
                 <h3 className={styles.font}>{product.name}</h3>
 
                 <div>

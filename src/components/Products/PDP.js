@@ -1,8 +1,9 @@
 import { gql, useQuery } from '@apollo/client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import styles from './PDP.module.css';
-
+import { addProduct } from '../../redux/cartRedux';
+import { useDispatch } from 'react-redux';
 export const PDP = () => {
   const location = useLocation();
   const id = location.pathname.split('/')[1];
@@ -37,13 +38,18 @@ export const PDP = () => {
   `;
 
   const [color, setColor] = useState('');
-  const [size, setSize] = useState('');
+  const [att, setAtt] = useState();
+  const dispatch = useDispatch();
+
+  const [quantity, setQuantity] = useState(1);
+
+  console.log(quantity)
 
   const handleClick = () => {
-    console.log('submit');
+    setQuantity(quantity );
+    dispatch(addProduct({ ...item,quantity, color, att, price: item.prices[0].amount * quantity }));
   };
 
-  console.log(color, size);
   const { loading, error, data } = useQuery(PRODUCT);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
@@ -99,8 +105,9 @@ export const PDP = () => {
                       {att.items.map(one => {
                         return (
                           <button
-                            onClick={() => setSize(one.value)}
+                            onClick={() => setAtt({ [att.id]: one.value })}
                             value={one.value}
+                            name={att.id}
                             className={styles.sizebtn}
                             key={one.value}
                           >
