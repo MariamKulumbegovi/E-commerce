@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Cart } from './Cart';
+import { Cart } from '.';
 import styles from '../layout/Header.module.css';
 
 export class MiniCart extends Component {

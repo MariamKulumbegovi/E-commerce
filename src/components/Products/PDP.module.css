@@ -32,7 +32,8 @@
 .name {
   font-weight: 400;
 }
-.addtocart {
+.addtocart,
+.disabledbtn {
   width: 292px;
   height: 52px;
   background-color: #5ece7b;
@@ -102,4 +103,7 @@
 }
 .cwrapper {
   display: flex;
+}
+.disabledbtn {
+  cursor: not-allowed;
 }

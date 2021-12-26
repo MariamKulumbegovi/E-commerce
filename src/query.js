@@ -16,9 +16,19 @@ export const Category = gql`
       products {
         id
         name
+        brand
         description
         inStock
         gallery
+        attributes {
+          id
+          name
+          items {
+            displayValue
+            value
+            id
+          }
+        }
         prices {
           currency {
             label

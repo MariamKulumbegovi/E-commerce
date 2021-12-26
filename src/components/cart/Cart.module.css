@@ -39,3 +39,14 @@
   justify-content: space-between;
   padding: 10px;
 }
+.dltbtn {
+  width: 45px;
+  height: 45px;
+  background-color: #fff;
+  border: 1px solid;
+  margin-top: 15px;
+}
+.btns {
+  display: flex;
+  flex-direction: column;
+}

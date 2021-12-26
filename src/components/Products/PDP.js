@@ -1,16 +1,18 @@
 import { gql, useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import { useLocation } from 'react-router';
+import { addToCart, adjustQty } from '../../redux/shopping/shopping-actions';
 import styles from './PDP.module.css';
-import { addProduct } from '../../redux/cartRedux';
-import { useDispatch } from 'react-redux';
-export const PDP = () => {
+
+const PDP = ({ addToCart,adjustQty }) => {
   const location = useLocation();
   const id = location.pathname.split('/')[1];
 
   const PRODUCT = gql`
   query GetProduct {
     product(id: "${id}") {
+      id
       gallery
       name
       brand
@@ -37,25 +39,15 @@ export const PDP = () => {
   }
   `;
 
-  const [color, setColor] = useState('');
-  const [att, setAtt] = useState();
-  const dispatch = useDispatch();
-
-  const [quantity, setQuantity] = useState(1);
-
-  console.log(quantity)
-
-  const handleClick = () => {
-    setQuantity(quantity );
-    dispatch(addProduct({ ...item,quantity, color, att, price: item.prices[0].amount * quantity }));
-  };
+  const [color, setColor] = useState();
+  const [att, setAtt] = useState('');
 
   const { loading, error, data } = useQuery(PRODUCT);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
   const item = data.product;
-
+  console.log(color, att);
   return (
     <div className={styles.wrapper}>
       <div className={styles.imgsWrapper}>
@@ -99,13 +91,13 @@ export const PDP = () => {
                 );
               } else {
                 return (
-                  <div>
+                  <div key={att.id}>
                     <h3>{att.id}:</h3>
                     <div>
                       {att.items.map(one => {
                         return (
                           <button
-                            onClick={() => setAtt({ [att.id]: one.value })}
+                            onClick={() => setAtt(one.value)}
                             value={one.value}
                             name={att.id}
                             className={styles.sizebtn}
@@ -127,7 +119,11 @@ export const PDP = () => {
           <strong className={styles.price}> $50 </strong>
         </div>
         <div>
-          <button onClick={handleClick} className={styles.addtocart}>
+          <button
+            onClick={() => addToCart(item.id,color)}
+            className={item.inStock ? styles.addtocart : styles.disabledbtn}
+            disabled={item.inStock ? false : true}
+          >
             ADD TO CART
           </button>
         </div>
@@ -138,3 +134,11 @@ export const PDP = () => {
     </div>
   );
 };
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addToCart: (id,color) => dispatch(addToCart(id , color)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(PDP);

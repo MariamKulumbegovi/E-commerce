@@ -1,5 +1,5 @@
 import React from 'react';
-import { PDP } from '../../components/Products/PDP';
+import { PDP } from '../../components/Products';
 
 export const PDP_Page = () => {
   return (

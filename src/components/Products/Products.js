@@ -1,4 +1,4 @@
-import { Product } from './Product';
+import { Product } from '.';
 import styles from './Products.module.css';
 
 export const Products = ({ data }) => {

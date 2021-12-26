@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import * as route from '../../constants/routes';
 import styles from './Header.module.css';
 import logo from '../../img/a-logo.svg';
@@ -7,11 +7,20 @@ import cartl from '../../img/EmptyCart.svg';
 import { useQuery } from '@apollo/client';
 import { CURRENCIES } from '../../query';
 import { MiniCart } from '../cart/MiniCart';
+import { useEffect, useState } from 'react';
 
-export const Header = () => {
-  const quantity = useSelector(state => state.cart.quantity);
+export const Header = ({ cart }) => {
+  // const quantity = useSelector(state => state.cart.quantity);
 
- 
+  const [cartQty, setCartQty] = useState(0);
+
+  useEffect(() => {
+    let count = 0;
+    cart.forEach(item => {
+      count += item.qty;
+    });
+    setCartQty(count);
+  }, [cart, cartQty]);
 
   const { loading, error, data } = useQuery(CURRENCIES);
 
@@ -62,7 +71,7 @@ export const Header = () => {
           </select>
           <div className={styles.cartdiv}>
             <Link to={route.CART_PATH}>
-              <label className={styles.cartLabel}>{quantity}</label>
+              <label className={styles.cartLabel}>{cartQty}</label>
               <img
                 className={styles.cart}
                 width="auto"
@@ -78,3 +87,11 @@ export const Header = () => {
     </header>
   );
 };
+
+const mapToStateProps = state => {
+  return {
+    cart: state.shop.cart,
+  };
+};
+
+export default connect(mapToStateProps)(Header);

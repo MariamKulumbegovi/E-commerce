@@ -44,3 +44,9 @@
   width: 52px;
   bottom: 21%;
 }
+.add_to_cartbtn {
+  cursor: cell;
+}
+.disabledbtn {
+  cursor: not-allowed;
+}

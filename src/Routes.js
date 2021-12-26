@@ -1,5 +1,5 @@
 import { Route, Switch } from 'react-router-dom';
-import { Cart } from './components/cart/Cart';
+import { Cart } from './components/cart';
 import * as route from './constants/routes';
 import { HomePage, ClothesPage, TechPage } from './pages/Categories';
 import { PDP_Page } from './pages/PDP-page/PDP_Page';
