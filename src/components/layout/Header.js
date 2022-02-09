@@ -6,7 +6,6 @@ import logo from '../../img/a-logo.svg';
 import cartl from '../../img/EmptyCart.svg';
 import { useQuery } from '@apollo/client';
 import { CURRENCIES } from '../../query';
-import { MiniCart } from '../cart/MiniCart';
 import { useEffect, useState } from 'react';
 
 export const Header = ({ cart }) => {
@@ -60,15 +59,7 @@ export const Header = ({ cart }) => {
           </Link>
         </div>
         <div className={styles.actions}>
-          <select>
-            {data.currencies.map(curr => {
-              return (
-                <option key={curr.label}>
-                  {curr.label} {curr.symbol}{' '}
-                </option>
-              );
-            })}
-          </select>
+       
           <div className={styles.cartdiv}>
             <Link to={route.CART_PATH}>
               <label className={styles.cartLabel}>{cartQty}</label>
@@ -80,7 +71,7 @@ export const Header = ({ cart }) => {
               />
             </Link>
 
-            <MiniCart />
+        
           </div>
         </div>
       </nav>
